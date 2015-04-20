@@ -4,6 +4,9 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	// Singleton object
+	public static PlayerController Instance;
+
 	// Movement variables
 	private float moveX = 0.0f;
 	private float moveY = 0.0f;
@@ -31,6 +34,9 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody2D rigidbody2D;
 	
 	void Start () {
+		// Create Singleton
+		Instance = this;
+
 		// Get components
 		animator = GetComponent<Animator> ();
 		rigidbody2D = GetComponent<Rigidbody2D>();
@@ -68,12 +74,12 @@ public class PlayerController : MonoBehaviour {
 				if (moveX > 0)
 				{
 					animator.SetInteger("animState", 1);
-					Debug.Log("1");
+					//Debug.Log("1");
 				}
 				else if (moveX < 0)
 				{
 					animator.SetInteger("animState", 2);
-					Debug.Log("2");
+					//Debug.Log("2");
 				}
 			} // If taking off while walking
 			else if (isGrounded && moveY > 0) 
@@ -84,12 +90,12 @@ public class PlayerController : MonoBehaviour {
 				if (moveX > 0) 
 				{
 					animator.SetInteger("animState", 3);
-					Debug.Log("wlk+up rg 3");
+					//Debug.Log("wlk+up rg 3");
 				} 
 				else if (moveX < 0) 
 				{
 					animator.SetInteger("animState", 3);
-					Debug.Log("wlk+up lf 3");
+					//Debug.Log("wlk+up lf 3");
 				}
 			} // If in the air
 			else if (!isGrounded)
@@ -101,25 +107,25 @@ public class PlayerController : MonoBehaviour {
 					}
 					if (moveX > 0) {
 						animator.SetInteger("animState", 5);
-						Debug.Log("up 3");
+						//Debug.Log("up 3");
 					}
 					if (moveX < 0) {
 						animator.SetInteger("animState", 4);
-						Debug.Log("up 4");
+						//Debug.Log("up 4");
 					}
 
 				} // If falling left or right
 				else {
 					if (moveX > 0) {
 						animator.SetInteger("animState", 6);
-						Debug.Log("Falling right");
+						//Debug.Log("Falling right");
 					}
 					else if (moveX < 0) {
 						animator.SetInteger("animState", 5);
-						Debug.Log("Falling left");
+						//Debug.Log("Falling left");
 					}
 					else {
-						Debug.Log("Falling");
+						//Debug.Log("Falling");
 					}
 				}
 			}
@@ -131,11 +137,11 @@ public class PlayerController : MonoBehaviour {
 					forceY = jetSpeed * moveY;
 				}
 				animator.SetInteger("animState", 3);
-				Debug.Log("idle 3");
+				//Debug.Log("idle 3");
 			}
 			else { // Idle position
 				animator.SetInteger("animState", 0);
-				Debug.Log("idle 0");
+				//Debug.Log("idle 0");
 			}
 		}
 
