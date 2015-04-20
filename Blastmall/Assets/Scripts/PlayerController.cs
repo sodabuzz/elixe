@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 	public float airSpeedMultiplier = 0.3f;
 	
 	// To check if on the floor or in the air
-	public bool isGrounded;
+	public bool isGrounded = true;
 	public Transform groundCheck;
 	public LayerMask groundLayers;
 	public float groundCheckRadius = 2f;
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
 
 
 		// Check if on the ground
-		isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayers); 
+		//isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayers); 
 
 		// If the character is moving left or right
 		if (moveX != 0.0f) {
@@ -127,6 +127,13 @@ public class PlayerController : MonoBehaviour {
 		else {
 			// If idle and taking off or turning jetpack on while falling
 			if (moveY > 0) {
+				if (absVelY < maxVelocity.y){
+					forceY = jetSpeed * moveY;
+				}
+				animator.SetInteger("animState", 3);
+				Debug.Log("idle 3");
+			}
+			if (moveY < 0) {
 				if (absVelY < maxVelocity.y){
 					forceY = jetSpeed * moveY;
 				}
